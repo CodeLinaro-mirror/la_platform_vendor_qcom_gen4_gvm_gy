@@ -42,3 +42,5 @@ endif
 # TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 # Set the system.prop files to that of the inherited product plus the new product. Alternatively, the system.prop file can be copied over
 # TARGET_SYSTEM_PROP := device/qcom/msmnile_gvmq/system.prop device/qcom/gen4_gvm_gy/system.prop
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.boot.audio=audioreach_vio
