@@ -27,12 +27,12 @@ then
 	rm -Rf scratch
 fi
 mkdir scratch
-cp $IMG_PATH/dtbs/dtbo.img $OUTPATH/scratch/
+cp $IMG_PATH/dtbs/dtb.img $OUTPATH/scratch/
 cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
-python3 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/vm/pil_tools/image_header.py autogvm-boot.elf Image,0x0 dtbo.img,0x3000000 ramdisk.img,0x3100000 --32
+python3 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/vm/pil_tools/image_header.py autogvm-boot.elf Image,0x0 dtb.img,0x3000000 ramdisk.img,0x3100000 --32
 
 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/sectools/sectools secure-image autogvm-boot.elf --image-id GVM1 --security-profile $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/sectools/profiles/lemans_tz_security_profile.xml --sign --signing-mode TEST --outfile autogvm_signed-boot.elf
 
