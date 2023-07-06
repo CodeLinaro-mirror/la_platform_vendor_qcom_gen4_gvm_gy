@@ -45,4 +45,5 @@ fi
 mkdir boot
 python3 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/vm/pil_tools/pil-splitter.py autogvm_signed-boot.elf boot/autoghgvm
 
-
+echo "Creating the vm-boot.img"
+$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot $OUTPATH/vm-boot.img ext4 / 60000000
