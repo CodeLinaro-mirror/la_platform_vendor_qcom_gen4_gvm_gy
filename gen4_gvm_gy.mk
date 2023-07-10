@@ -9,7 +9,7 @@ PRODUCT_MODEL := gen4_gvm_gy for arm64
 #flag to differentiate b/w HQX and HGY builds
 TARGET_USES_GY := true
 
-TARGET_USES_GAS := false
+TARGET_USES_GAS := true
 BOARD_HAS_QCOM_WLAN := false
 #TODO - These defines will be removed after the AVB is enabled by security team.
 PRODUCT_SUPPORTS_BOOT_SIGNER := false
