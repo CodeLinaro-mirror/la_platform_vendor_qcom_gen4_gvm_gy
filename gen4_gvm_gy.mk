@@ -42,6 +42,8 @@ ifeq ($(KERNEL_MODULES_OUT),)
   KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_DEVICE)/$(KERNEL_MODULES_INSTALL)/lib/modules
 endif
 
+PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
+
 # TARGET_KERNEL_VERSION := 5.15
 # TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 # Set the system.prop files to that of the inherited product plus the new product. Alternatively, the system.prop file can be copied over
