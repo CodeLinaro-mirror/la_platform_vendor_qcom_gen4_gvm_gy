@@ -29,20 +29,26 @@
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import os
 import sys
 import elf_tools
 import argparse
 
-p = argparse.ArgumentParser(description="Packages a list of Binary Images into ELF Format")
+p = argparse.ArgumentParser(
+    description="Packages a list of Binary Images into ELF Format"
+)
 p.add_argument("output", help="Output constructed ELF file")
-p.add_argument("images", type=lambda x: str.split(x, ","),
-    nargs="+", help="List of <filename>,<img_dest>", metavar="input,destination")
-p.add_argument("--32", action="store_true",
-    help="Indicates a 32-bit ELF. Default is 64-bit")
-p.add_argument('--ghloader', type=str, required=True)
+p.add_argument(
+    "images",
+    type=lambda x: str.split(x, ","),
+    nargs="+",
+    help="List of <filename>,<img_dest>",
+    metavar="input,destination",
+)
+p.add_argument(
+    "--32", action="store_true", help="Indicates a 32-bit ELF. Default is 64-bit"
+)
 ap = p.parse_args()
 
 elf_tools.create_elf(ap.output, ap.images, class_64=(not vars(ap)["32"]))
-if not elf_tools.verify_elf(ap.output, ap.ghloader):
+if not elf_tools.verify_elf(ap.output):
     sys.exit(1)
