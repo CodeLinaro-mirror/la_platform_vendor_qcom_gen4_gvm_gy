@@ -23,5 +23,5 @@ else
   include $(BUILD_PREBUILT)
 endif ##BOARD_DYNAMIC_PARTITION_ENABLE
 # Include the base products AndroidBoard.mk
-include device/qcom/msmnile_gvmq/AndroidBoard.mk
+include device/qcom/gen4_gvm/AndroidBoard.mk
 

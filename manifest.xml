@@ -103,7 +103,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
     </hal>
     <hal format="aidl">
         <name>android.hardware.memtrack</name>
-        <version>1</version>
+        <version>1.0</version>
         <interface>
             <name>IMemtrack</name>
             <instance>default</instance>
