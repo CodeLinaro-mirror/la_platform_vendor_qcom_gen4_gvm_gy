@@ -34,12 +34,11 @@ cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
-
 python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 dtb.img,0x3000000 ramdisk.img,0x3100000 --32
 
-$ROOT_DIR/vendor/qcom/proprietary/sectools/Linux/sectools secure-image autogvm-boot.elf --image-id GVM1 --security-profile $ROOT_DIR/vendor/qcom/proprietary/securemsm/security_profiles/lemans_tz_security_profile.xml --sign --signing-mode TEST --outfile autogvm_signed-boot.elf
+$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --image-id GVM1 --security-profile $QCPATH/securemsm/security_profiles/lemans_tz_security_profile.xml --sign --signing-mode TEST --outfile autogvm_signed-boot.elf
 
-$ROOT_DIR/vendor/qcom/proprietary/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
+$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
 
 if [ -d "$OUTPATH/scratch/boot" ]
 then
