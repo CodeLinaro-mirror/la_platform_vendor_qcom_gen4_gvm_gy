@@ -1,5 +1,5 @@
 # Inherit from the base product
-$(call inherit-product, device/qcom/gen4_gvm/gen4_gvm.mk)
+include device/qcom/gen4_gvm/gen4_gvm.mk
 
 PRODUCT_NAME := gen4_gvm_gy
 PRODUCT_DEVICE := gen4_gvm_gy
@@ -11,15 +11,15 @@ TARGET_BOARD_DERIVATIVE_SUFFIX:=_gy
 TARGET_USES_GY := true
 
 TARGET_USES_GAS := false
-BOARD_HAS_QCOM_WLAN := false
-#TODO - These defines will be removed after the AVB is enabled by security team.
-#PRODUCT_SUPPORTS_BOOT_SIGNER := false
-#PRODUCT_SUPPORTS_VERITY := false
-#PRODUCT_SUPPORTS_VERITY_FEC := false
-#Flags to disable HSI2S and AIS dlkm for compilation
-#TODO: Remove these once compilation issues are fixed
+
 TARGET_DISABLE_HSI2S_DLKM := true
 TARGET_DISABLE_AIS_DLKM := true
+TARGET_DISABLE_DISPLAY_DLKM := true
+TARGET_HAS_VIRTIO_FASTRPC := false
+TARGET_HAS_DIAG_ROUTER := false
+
+#Disable QCOM WLAN
+BOARD_HAS_QCOM_WLAN := false
 
 ENABLE_AB ?= true
 
@@ -27,7 +27,6 @@ ifeq ($(ENABLE_AB), true)
 PRODUCT_COPY_FILES += device/qcom/gen4_gvm_gy/fstab_AB_dynamic_partition_variant.gen4_gy.qti:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 endif
 
-TARGET_HAS_DIAG_ROUTER := false
 
 #Disable gps services
 TARGET_USES_QMAA_OVERRIDE_GPS := false
