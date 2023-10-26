@@ -1,3 +1,6 @@
+#Configure derivative suffix for conditional compilation
+TARGET_BOARD_DERIVATIVE_SUFFIX:=_gy
+
 # Inherit from the base product
 include device/qcom/gen4_gvm/gen4_gvm.mk
 
@@ -5,7 +8,6 @@ PRODUCT_NAME := gen4_gvm_gy
 PRODUCT_DEVICE := gen4_gvm_gy
 PRODUCT_BRAND := qti
 PRODUCT_MODEL := gen4_gvm_gy for arm64
-TARGET_BOARD_DERIVATIVE_SUFFIX:=_gy
 
 #flag to differentiate b/w HQX and HGY builds
 TARGET_USES_GY := true
