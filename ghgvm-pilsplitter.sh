@@ -15,7 +15,7 @@ PWD=`pwd`;
 #echo "$PWD"
 ROOT_DIR="$PWD/../../../"
 #echo "$ROOT_DIR"
-IMG_PATH="$PWD/../msmnile-kernel"
+IMG_PATH="$PWD/../gen4-kernel"
 #echo "$IMG_PATH"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
@@ -46,4 +46,4 @@ mkdir boot
 python3 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/vm/pil_tools/pil-splitter.py autogvm_signed-boot.elf boot/autoghgvm
 
 echo "Creating the vm-boot.img"
-$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot $OUTPATH/vm-boot.img ext4 / 64000000
+$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot $OUTPATH/vm-boot.img ext4 / 70000000
