@@ -13,6 +13,8 @@
 
 PWD=`pwd`;
 #echo "$PWD"
+PIL_PATH="$PWD"
+#echo "$PIL_PATH"
 ROOT_DIR="$PWD/../../../"
 #echo "$ROOT_DIR"
 IMG_PATH="$PWD/../gen4-kernel"
@@ -32,18 +34,18 @@ cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
-python3 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/vm/pil_tools/image_header.py autogvm-boot.elf Image,0x0 dtb.img,0x3000000 ramdisk.img,0x3100000 --32
+python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 dtb.img,0x3000000 ramdisk.img,0x3100000 --32
 
-$ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/sectools/sectools secure-image autogvm-boot.elf --image-id GVM1 --security-profile $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/sectools/profiles/lemans_tz_security_profile.xml --sign --signing-mode TEST --outfile autogvm_signed-boot.elf
+$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --image-id GVM1 --security-profile $QCPATH/securemsm/security_profiles/lemans_tz_security_profile.xml --sign --signing-mode TEST --outfile autogvm_signed-boot.elf
 
-$ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/sectools/sectools secure-image autogvm-boot.elf --inspect
+$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
 
 if [ -d "$OUTPATH/scratch/boot" ]
 then
 	rm -Rf boot
 fi
 mkdir boot
-python3 $ROOT_DIR/kernel_platform/prebuilts/qcom_boot_artifacts/vm/pil_tools/pil-splitter.py autogvm_signed-boot.elf boot/autoghgvm
+python3 $PIL_PATH/pil-splitter.py autogvm_signed-boot.elf boot/autoghgvm
 
 echo "Creating the vm-boot.img"
 $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot $OUTPATH/vm-boot.img ext4 / 70000000
