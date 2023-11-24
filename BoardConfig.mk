@@ -18,6 +18,10 @@ BOARD_AVB_ENABLE := true
 DEVICE_MANIFEST_FILE := device/qcom/gen4_gvm_gy/manifest.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/gen4_gvm_gy/framework_manifest.xml
 
+ifeq ($(TARGET_USES_AUDIOLITE), true)
+AUDIO_USE_STUB_HAL := true
+endif
+
 #Overwrite required variables below this
 # Base product BoardConfigVendor.mk will already be included. So, use below to set new variables or to override old ones
 -include $(QCPATH)/common/gen4_gvm_gy/BoardConfigVendor.mk
