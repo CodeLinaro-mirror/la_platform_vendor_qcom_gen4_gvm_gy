@@ -34,7 +34,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
-        <version>6.0</version>
+        <version>7.0</version>
         <interface>
             <name>IDevicesFactory</name>
             <instance>default</instance>
@@ -43,7 +43,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
         <transport>hwbinder</transport>
-        <version>6.0</version>
+        <version>7.0</version>
         <interface>
             <name>IEffectsFactory</name>
             <instance>default</instance>
@@ -55,20 +55,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
         <version>2.3</version>
         <interface>
             <name>ISoundTriggerHw</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <!-- video omx hal -->
-    <hal format="hidl">
-        <name>android.hardware.media.omx</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOmx</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IOmxStore</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -247,18 +233,9 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.bluetooth_sar</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IBluetoothSar</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="aidl">
         <name>android.hardware.automotive.audiocontrol</name>
-        <version>1</version>
+        <version>3</version>
         <interface>
             <name>IAudioControl</name>
             <instance>default</instance>
