@@ -48,3 +48,5 @@ PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
 
 PRODUCT_VENDOR_PROPERTIES += \
     ro.boot.audio=audioreach_vio
+
+PRODUCT_PACKAGES += uhabtest
