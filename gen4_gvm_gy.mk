@@ -16,7 +16,6 @@ TARGET_USES_GAS := false
 
 TARGET_DISABLE_HSI2S_DLKM := true
 TARGET_DISABLE_AIS_DLKM := true
-TARGET_DISABLE_DISPLAY_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
 TARGET_HAS_DIAG_ROUTER := false
 
@@ -49,3 +48,5 @@ PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
 
 PRODUCT_VENDOR_PROPERTIES += \
     ro.boot.audio=audioreach_vio
+
+PRODUCT_PACKAGES += uhabtest
