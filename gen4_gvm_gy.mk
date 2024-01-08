@@ -30,8 +30,23 @@ endif
 
 
 #Disable gps services
+###########
+#QMAA flags starts
+###########
+#QMAA global flag for modular architecture
+#true means QMAA is enabled for system
+#false means QMAA is disabled for system
+
+TARGET_USES_QMAA := true
+
+#QMAA tech team flag to override global QMAA per tech team
+#true means overriding global QMAA for this tech area
+#false means using global, no override
+TARGET_USES_QMAA_OVERRIDE_AUDIO   := true
 TARGET_USES_QMAA_OVERRIDE_GPS := false
 
+#Full QMAA HAL List
+QMAA_HAL_LIST := audio
 
 # Change Kernel modules install path
 KERNEL_MODULES_INSTALL := dlkm
