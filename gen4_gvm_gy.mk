@@ -44,6 +44,7 @@ TARGET_USES_QMAA := true
 #false means using global, no override
 TARGET_USES_QMAA_OVERRIDE_AUDIO   := true
 TARGET_USES_QMAA_OVERRIDE_GPS := false
+TARGET_USES_QMAA_OVERRIDE_DISPLAY := true
 
 #Full QMAA HAL List
 QMAA_HAL_LIST := audio
