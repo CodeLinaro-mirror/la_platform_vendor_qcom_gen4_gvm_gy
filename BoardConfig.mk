@@ -1,6 +1,9 @@
 # Include the BoardConfig.mk of base product
 include device/qcom/gen4_gvm/BoardConfig.mk
 
+TARGET_ARCH := arm64
+TARGET_2ND_ARCH := arm
+
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT :=
