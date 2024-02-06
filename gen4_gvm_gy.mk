@@ -14,6 +14,9 @@ TARGET_USES_GY := true
 
 TARGET_USES_GAS := false
 
+# Enable Smcinvoke based System Listeners
+TARGET_ENABLE_SMCI_SYSLISTENER := true
+
 TARGET_DISABLE_HSI2S_DLKM := true
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
