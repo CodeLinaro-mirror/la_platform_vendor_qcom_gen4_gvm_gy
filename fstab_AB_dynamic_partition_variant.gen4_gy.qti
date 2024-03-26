@@ -39,7 +39,7 @@ vendor                                                 /vendor                 e
 system_dlkm                                            /system_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
 vendor_dlkm                                            /vendor_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
 /dev/block/by-name/metadata                            /metadata               ext4    noatime,nosuid,nodev                                 defaults
-/dev/block/by-name/userdata                            /data                   f2fs    rw,noatime                                           defaults
+/dev/block/by-name/userdata                            /data                   f2fs    rw,noatime                                           latemount,wait,check,quota,reservedsize=128M,checkpoint=fs
 /devices/platform/soc/8804000.sdhci/mmc_host*          /storage/sdcard1        vfat    nosuid,nodev                                         wait,voldmanaged=sdcard1:auto,encryptable=footer
 /devices/platform/soc/1da4000.ufshc_card/host*         /storage/sdcard1        vfat    nosuid,nodev                                         wait,voldmanaged=sdcard1:auto,encryptable=footer
 /dev/block/modem                                       /vendor/firmware_mnt    vfat    ro,shortname=lower,uid=0,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0               defaults,slotselect

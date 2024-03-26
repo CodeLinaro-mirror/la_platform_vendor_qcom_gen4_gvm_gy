@@ -14,6 +14,9 @@ TARGET_USES_GY := true
 
 TARGET_USES_GAS := false
 
+# Enable Smcinvoke based System Listeners
+TARGET_ENABLE_SMCI_SYSLISTENER := true
+
 TARGET_DISABLE_HSI2S_DLKM := true
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
@@ -45,6 +48,7 @@ TARGET_USES_QMAA := true
 TARGET_USES_QMAA_OVERRIDE_AUDIO   := true
 TARGET_USES_QMAA_OVERRIDE_GPS := false
 TARGET_USES_QMAA_OVERRIDE_DISPLAY := true
+TARGET_USES_QMAA_OVERRIDE_GFX := true
 
 #Full QMAA HAL List
 QMAA_HAL_LIST := audio
@@ -55,8 +59,6 @@ ifeq ($(KERNEL_MODULES_OUT),)
   KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_DEVICE)/$(KERNEL_MODULES_INSTALL)/lib/modules
 endif
 
-
-PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
 
 # TARGET_KERNEL_VERSION := 5.15
 # TARGET_HAS_GENERIC_KERNEL_HEADERS := true
