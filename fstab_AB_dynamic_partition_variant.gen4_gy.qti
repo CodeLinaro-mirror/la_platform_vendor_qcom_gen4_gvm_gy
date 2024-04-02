@@ -32,9 +32,10 @@
 #TODO: Add 'check' as fs_mgr_flags with data partition.
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
-#<src>                                                 <mnt_point>            <type>  <mnt_flags and options>                            <fs_mgr_flags>
+#<src>                                                 <mnt_point>            <type>  <mnt_flags and options>                               <fs_mgr_flags>
 system                                                 /system                 ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
 system_ext                                             /system_ext             ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
+product                                                /product                ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
 vendor                                                 /vendor                 ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
 system_dlkm                                            /system_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
 vendor_dlkm                                            /vendor_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
