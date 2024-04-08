@@ -17,6 +17,10 @@ TARGET_USES_GAS := false
 # Enable Smcinvoke based System Listeners
 TARGET_ENABLE_SMCI_SYSLISTENER := true
 
+#Enable qseecom compat and disable qseecom for HGY
+TARGET_ENABLE_QSEECOMCOMPAT := true
+TARGET_ENABLE_QSEECOM := false
+
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
 TARGET_HAS_DIAG_ROUTER := false
