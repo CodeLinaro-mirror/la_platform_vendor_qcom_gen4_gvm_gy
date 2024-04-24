@@ -1,6 +1,16 @@
 # Include the BoardConfig.mk of base product
 include device/qcom/gen4_gvm/BoardConfig.mk
 
+ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS), true)
+ifeq ($(TARGET_BOARD_TYPE), auto)
+ifneq "$(wildcard external/boost)" ""
+ifneq "$(wildcard external/vsomeip)" ""
+${call soong_config_set,wifi,wifi_enable_someip,true}
+endif
+endif
+endif
+endif
+
 TARGET_ARCH := arm64
 TARGET_2ND_ARCH := arm
 
