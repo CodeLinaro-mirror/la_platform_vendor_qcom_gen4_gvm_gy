@@ -25,9 +25,6 @@ TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
 TARGET_HAS_DIAG_ROUTER := false
 
-#Disable QCOM WLAN
-BOARD_HAS_QCOM_WLAN := false
-
 ENABLE_AB ?= true
 
 ifeq ($(ENABLE_AB), true)
