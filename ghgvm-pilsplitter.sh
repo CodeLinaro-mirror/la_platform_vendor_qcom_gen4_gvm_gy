@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+# Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause-Clear
 #
 
@@ -17,6 +17,8 @@ PIL_PATH="$PWD"
 #echo "$PIL_PATH"
 ROOT_DIR="$PWD/../../../"
 #echo "$ROOT_DIR"
+MKDTBOIMGPY_PATH=$ROOT_DIR/system/libufdt/utils/src
+#echo "$MKDTBOIMGPY_PATH"
 IMG_PATH="$PWD/../gen4-kernel"
 #echo "$IMG_PATH"
 cd $IMG_PATH
@@ -29,7 +31,18 @@ then
 	rm -Rf scratch
 fi
 mkdir scratch
-cp $IMG_PATH/dtbs/dtb.img $OUTPATH/scratch/
+
+# Create dtb.img with DT table structure
+# ref: https://source.android.com/docs/core/architecture/dto/partitions
+DTB_FILE_LIST=$(find $IMG_PATH/dtbs -name "*.dtb" | sort)
+if [ -z "${DTB_FILE_LIST}" ]; then
+	echo "No *.dtb files found in $IMG_PATH/dtbs"
+	exit 1
+else
+	echo "Creating the dtb.img"
+	python3 $MKDTBOIMGPY_PATH/mkdtboimg.py create $OUTPATH/scratch/dtb.img $DTB_FILE_LIST
+fi
+
 cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cd $OUTPATH/scratch
