@@ -24,6 +24,7 @@ IMG_PATH="$PWD/../gen4-kernel"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
 #echo "$OUTPATH"
+SECURITY_PROFILE_PATH="$QCPATH/securemsm/security_profiles"
 cd $OUTPATH
 # Create scratch folder to copy the images for creating split PIL images
 if [ -d "$OUTPATH/scratch" ]
@@ -45,20 +46,41 @@ fi
 
 cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
+cp $IMG_PATH/kernel-abl/abl-*/LinuxLoader.efi $OUTPATH/scratch/
+cp $QCPATH/guest-bootloader/FVMAIN_COMPACT.Fv $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
-python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 dtb.img,0x3000000 ramdisk.img,0x3100000 --32
+python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 \
+	dtb.img,0x3000000 ramdisk.img,0x3100000 --32
+python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
+	dtb.img,0x10000000 LinuxLoader.efi,0x10100000 --32
 
-$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --image-id GVM1 --security-profile $QCPATH/securemsm/security_profiles/lemans_tz_security_profile.xml --sign --signing-mode TEST --outfile autogvm_signed-boot.elf
+$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
+	--image-id GVM1 \
+	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
+	--sign --signing-mode TEST \
+	--outfile autogvm_signed-boot.elf
+$QCPATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf \
+	--image-id GVM1 \
+	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
+	--sign --signing-mode TEST \
+	--outfile autogvm_signed-bootloader.elf
 
 $QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
+$QCPATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf --inspect
 
-if [ -d "$OUTPATH/scratch/boot" ]
+if [ -d "$OUTPATH/scratch/boot" -o -d "$OUTPATH/scratch/bootloader" ]
 then
-	rm -Rf boot
+	rm -Rf boot bootloader
 fi
-mkdir boot
+mkdir boot bootloader
 python3 $PIL_PATH/pil-splitter.py autogvm_signed-boot.elf boot/autoghgvm
+python3 $PIL_PATH/pil-splitter.py autogvm_signed-bootloader.elf bootloader/autoghgvm
 
 echo "Creating the vm-boot.img"
-$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot $OUTPATH/vm-boot.img ext4 / 70000000
+$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot \
+	$OUTPATH/vm-boot.img ext4 / 70000000
+
+echo "Creating the vm-bootloader.img"
+$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/bootloader \
+	$OUTPATH/vm-bootloader.img ext4 / 7000000
