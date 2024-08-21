@@ -48,3 +48,5 @@ vendor                                                 /vendor                 e
 # and fails if it does not find it.
 /dev/block/by-name/misc                                        /misc                   emmc    defaults                                             defaults
 /devices/*/xhci-hcd.*.auto*                            /storage/usbotg         vfat    nosuid,nodev                                         wait,voldmanaged=usbotg:auto
+
+/dev/block/dsp                                        /vendor/dsp              ext4   ro,nosuid,nodev,barrier=1  wait
