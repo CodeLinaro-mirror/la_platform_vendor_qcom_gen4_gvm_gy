@@ -23,6 +23,12 @@ ifeq ($(TARGET_USES_AUDIOLITE), true)
 AUDIO_USE_STUB_HAL := true
 endif
 
+#namespace definition for qtiwifi
+#differentiate auto and non-auto target
+SOONG_CONFIG_NAMESPACES += qtiwifi
+SOONG_CONFIG_qtiwifi += automobile
+SOONG_CONFIG_qtiwifi_automobile := true
+
 #Overwrite required variables below this
 # Base product BoardConfigVendor.mk will already be included. So, use below to set new variables or to override old ones
 -include $(QCPATH)/common/gen4_gvm_gy/BoardConfigVendor.mk

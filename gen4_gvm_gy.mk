@@ -73,3 +73,4 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.boot.audio=audioreach_vio
 
 PRODUCT_PACKAGES += uhabtest
+PRODUCT_PACKAGES += qtiwifi
