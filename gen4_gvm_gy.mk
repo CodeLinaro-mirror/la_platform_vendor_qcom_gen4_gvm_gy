@@ -31,6 +31,9 @@ ifeq ($(ENABLE_AB), true)
 PRODUCT_COPY_FILES += device/qcom/gen4_gvm_gy/fstab_AB_dynamic_partition_variant.gen4_gy.qti:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
 endif
 
+# Copy device information files which represent different Audio Stacks (AR vs AWE)
+PRODUCT_COPY_FILES += device/qcom/gen4_gvm_gy/devinfo_ar.img:$(TARGET_COPY_OUT)/devinfo_ar.img
+PRODUCT_COPY_FILES += device/qcom/gen4_gvm_gy/devinfo_awe.img:$(TARGET_COPY_OUT)/devinfo_awe.img
 
 #Disable gps services
 ###########
