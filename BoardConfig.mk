@@ -14,8 +14,6 @@ endif
 TARGET_ARCH := arm64
 TARGET_2ND_ARCH := arm
 
-BOARD_AVB_ENABLE := true
-
 DEVICE_MANIFEST_FILE := device/qcom/gen4_gvm_gy/manifest.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/gen4_gvm_gy/framework_manifest.xml
 
