@@ -14,8 +14,6 @@ endif
 TARGET_ARCH := arm64
 TARGET_2ND_ARCH := arm
 
-BOARD_AVB_ENABLE := true
-
 DEVICE_MANIFEST_FILE := device/qcom/gen4_gvm_gy/manifest.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/gen4_gvm_gy/framework_manifest.xml
 
@@ -28,6 +26,12 @@ BOARD_KERNEL_CMDLINE := debug user_debug=31 loglevel=9 print-fatal-signals=1  in
 ifeq ($(TARGET_USES_AUDIOLITE), true)
 AUDIO_USE_STUB_HAL := true
 endif
+
+#namespace definition for qtiwifi
+#differentiate auto and non-auto target
+SOONG_CONFIG_NAMESPACES += qtiwifi
+SOONG_CONFIG_qtiwifi += automobile
+SOONG_CONFIG_qtiwifi_automobile := true
 
 #Overwrite required variables below this
 # Base product BoardConfigVendor.mk will already be included. So, use below to set new variables or to override old ones
