@@ -24,6 +24,8 @@ IMG_PATH="$PWD/../gen4-kernel"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
 #echo "$OUTPATH"
+QCPATH="$PWD/../../../vendor/qcom/proprietary"
+#echo "$QCPATH"
 SECURITY_PROFILE_PATH="$QCPATH/securemsm/security_profiles"
 cd $OUTPATH
 # Create scratch folder to copy the images for creating split PIL images
