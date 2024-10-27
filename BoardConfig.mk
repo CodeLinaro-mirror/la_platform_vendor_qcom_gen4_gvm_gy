@@ -25,6 +25,12 @@ BOARD_KERNEL_CMDLINE := debug user_debug=31 loglevel=9 print-fatal-signals=1  in
 
 BOARD_BOOTCONFIG += androidboot.usbcontroller=a400000.dwc3
 
+ifeq ($(TARGET_CONSOLE_ENABLED),true)
+BOARD_KERNEL_CMDLINE += console=hvc0,115200
+else ifeq ($(TARGET_CONSOLE_ENABLED),false)
+BOARD_KERNEL_CMDLINE += qcom_geni_serial.con_enabled=0
+endif
+
 ifeq ($(TARGET_USES_AUDIOLITE), true)
 AUDIO_USE_STUB_HAL := true
 endif
