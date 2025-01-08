@@ -26,9 +26,6 @@ TARGET_HAS_VIRTIO_FASTRPC := false
 TARGET_HAS_DIAG_ROUTER := false
 TARGET_CONTROL_REMOTE_CEM_WLAN := true
 
-#Disable QCOM WLAN
-BOARD_HAS_QCOM_WLAN := false
-
 ENABLE_AB ?= true
 
 ifeq ($(ENABLE_AB), true)
