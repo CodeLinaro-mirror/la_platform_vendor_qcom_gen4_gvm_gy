@@ -17,6 +17,9 @@ TARGET_USES_GAS := false
 # Enable Smcinvoke based System Listeners
 TARGET_ENABLE_SMCI_SYSLISTENER := true
 
+# Disable GPFILE Listeners
+TARGET_ENABLE_GPFILE_LISTENER := false
+
 #Enable qseecom compat and disable qseecom for HGY
 TARGET_ENABLE_QSEECOMCOMPAT := true
 TARGET_ENABLE_QSEECOM := false
