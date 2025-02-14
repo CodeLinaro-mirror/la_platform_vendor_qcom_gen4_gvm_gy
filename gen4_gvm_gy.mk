@@ -79,6 +79,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 PRODUCT_PACKAGES += uhabtest
 PRODUCT_PACKAGES += qtiwifi
+PRODUCT_PACKAGES += routing_manager_daemon
 
 ifeq ($(TARGET_CONTROL_REMOTE_CEM_WLAN),true)
 PRODUCT_PACKAGES += android.hardware.wifi-service-cem
