@@ -17,14 +17,18 @@ TARGET_USES_GAS := false
 # Enable Smcinvoke based System Listeners
 TARGET_ENABLE_SMCI_SYSLISTENER := true
 
+# Disable GPFILE Listeners
+TARGET_ENABLE_GPFILE_LISTENER := false
+
 #Enable qseecom compat and disable qseecom for HGY
 TARGET_ENABLE_QSEECOMCOMPAT := true
 TARGET_ENABLE_QSEECOM := false
 
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
-
 TARGET_HAS_DIAG_ROUTER := true
+
+TARGET_CONTROL_REMOTE_CEM_WLAN := false
 
 ENABLE_AB ?= true
 
@@ -75,3 +79,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 PRODUCT_PACKAGES += uhabtest
 PRODUCT_PACKAGES += qtiwifi
+PRODUCT_PACKAGES += routing_manager_daemon
+
+ifeq ($(TARGET_CONTROL_REMOTE_CEM_WLAN),true)
+PRODUCT_PACKAGES += android.hardware.wifi-service-cem
+PRODUCT_PACKAGES += hostapd-cem
+PRODUCT_PACKAGES += qtiwifi-cem
+endif

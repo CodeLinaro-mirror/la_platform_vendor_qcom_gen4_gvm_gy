@@ -31,6 +31,12 @@ else ifeq ($(TARGET_CONSOLE_ENABLED),false)
 BOARD_KERNEL_CMDLINE += qcom_geni_serial.con_enabled=0
 endif
 
+ifeq ($(TARGET_CONSOLE_ENABLED),true)
+BOARD_KERNEL_CMDLINE += console=hvc0,115200
+else ifeq ($(TARGET_CONSOLE_ENABLED),false)
+BOARD_KERNEL_CMDLINE += qcom_geni_serial.con_enabled=0
+endif
+
 ifeq ($(TARGET_USES_AUDIOLITE), true)
 AUDIO_USE_STUB_HAL := true
 endif
