@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+# Copyright (c) 2023-2025 Qualcomm Innovation Center, Inc. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause-Clear
 #
 
@@ -29,8 +29,7 @@ QCPATH="$PWD/../../../vendor/qcom/proprietary"
 SECURITY_PROFILE_PATH="$QCPATH/securemsm/security_profiles"
 cd $OUTPATH
 # Create scratch folder to copy the images for creating split PIL images
-if [ -d "$OUTPATH/scratch" ]
-then
+if [ -d "$OUTPATH/scratch" ]; then
 	rm -Rf scratch
 fi
 mkdir scratch
@@ -46,42 +45,26 @@ else
 	python3 $MKDTBOIMGPY_PATH/mkdtboimg.py create $OUTPATH/scratch/dtb.img $DTB_FILE_LIST
 fi
 
-cp $IMG_PATH/Image $OUTPATH/scratch/
-cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cp $IMG_PATH/kernel-abl/abl-*/LinuxLoader.efi $OUTPATH/scratch/
 cp $QCPATH/guest-bootloader/FVMAIN_COMPACT.Fv $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
-python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 \
-	dtb.img,0x3000000 ramdisk.img,0x3100000 --32
 python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
 	dtb.img,0x10000000 LinuxLoader.efi,0x10100000 --32
 
-$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
-	--image-id GVM1 \
-	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
-	--sign --signing-mode TEST \
-	--outfile autogvm_signed-boot.elf
 $QCPATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-bootloader.elf
 
-$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
 $QCPATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf --inspect
 
-if [ -d "$OUTPATH/scratch/boot" -o -d "$OUTPATH/scratch/bootloader" ]
-then
-	rm -Rf boot bootloader
+if [ -d "$OUTPATH/scratch/bootloader" ]; then
+	rm -Rf bootloader
 fi
-mkdir boot bootloader
-python3 $PIL_PATH/pil-splitter.py autogvm_signed-boot.elf boot/autoghgvm
+mkdir bootloader
 python3 $PIL_PATH/pil-splitter.py autogvm_signed-bootloader.elf bootloader/autoghgvm
-
-echo "Creating the vm-boot.img"
-$ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot \
-	$OUTPATH/vm-boot.img ext4 / 70000000
 
 echo "Creating the vm-bootloader.img"
 $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/bootloader \
