@@ -12,7 +12,10 @@ PRODUCT_DEVICE := gen4_gvm_gy
 PRODUCT_BRAND := qti
 PRODUCT_MODEL := gen4_gvm_gy for arm64
 
-TARGET_USES_GAS := false
+# For single tree based build TARGET_USES_GAS needs to be set to true in the device make file
+ifeq ($(TARGET_SINGLE_TREE), true)
+TARGET_USES_GAS := true
+endif
 
 # Enable Smcinvoke based System Listeners
 TARGET_ENABLE_SMCI_SYSLISTENER := true
