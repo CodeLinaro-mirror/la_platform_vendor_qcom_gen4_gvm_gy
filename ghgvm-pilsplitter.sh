@@ -55,7 +55,7 @@ cd $OUTPATH/scratch
 python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 \
 	dtb.img,0x3000000 ramdisk.img,0x3100000 --32
 python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
-	dtb.img,0x10000000 LinuxLoader.efi,0x10100000 --32
+	dtb.img,0x0FC00000 LinuxLoader.efi,0x10100000 --32
 
 $QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
 	--image-id GVM1 \
@@ -85,4 +85,5 @@ $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/boot \
 
 echo "Creating the vm-bootloader.img"
 $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/bootloader \
-	$OUTPATH/vm-bootloader.img ext4 / 7000000
+	$OUTPATH/vm-bootloader.img ext4 / 8388608 \
+	--journal_size=0
