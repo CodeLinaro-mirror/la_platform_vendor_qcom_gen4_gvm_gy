@@ -12,6 +12,16 @@ PRODUCT_MODEL := gen4_gvm_gy for arm64
 #flag to differentiate b/w HQX and HGY builds
 TARGET_USES_GY := true
 
+# Enable Smcinvoke based System Listeners
+TARGET_ENABLE_SMCI_SYSLISTENER := true
+
+#Enable qseecom compat and disable qseecom for HGY
+TARGET_ENABLE_QSEECOMCOMPAT := true
+TARGET_ENABLE_QSEECOM := false
+
+# Disable GPFILE Listeners
+TARGET_ENABLE_GPFILE_LISTENER := false
+
 TARGET_DISABLE_HSI2S_DLKM := true
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
