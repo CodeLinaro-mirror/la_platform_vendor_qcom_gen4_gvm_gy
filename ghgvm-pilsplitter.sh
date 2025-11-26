@@ -24,7 +24,10 @@ IMG_PATH="$PWD/../gen4-kernel"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
 #echo "$OUTPATH"
-QCPATH="$PWD/../../../vendor/qcom/proprietary"
+if [[ -z "${QCPATH}" ]]; then
+    echo "ERROR: QCPATH is empty and must be set for all vendor references"
+    exit 1
+fi
 #echo "$QCPATH"
 SECURITY_PROFILE_PATH="$QCPATH/securemsm/security_profiles"
 cd $OUTPATH
