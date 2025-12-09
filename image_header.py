@@ -1,6 +1,5 @@
 # Copyright (c) 2020 Qualcomm Technologies, Inc.
-# All Rights Reserved.
-# Confidential and Proprietary - Qualcomm Technologies, Inc.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
 
 # Copyright (c) 2015, The Linux Foundation. All rights reserved.
 #
