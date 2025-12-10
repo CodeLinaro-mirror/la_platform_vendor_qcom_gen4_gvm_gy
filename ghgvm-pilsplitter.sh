@@ -23,6 +23,8 @@ IMG_PATH="$PWD/../gen4-kernel"
 #echo "$IMG_PATH"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
+ABSQC_PATH="$ROOT_DIR/$QCPATH"
+
 #echo "$OUTPATH"
 if [[ -z "${QCPATH}" ]]; then
     echo "ERROR: QCPATH is empty and must be set for all vendor references."
@@ -30,8 +32,8 @@ if [[ -z "${QCPATH}" ]]; then
     echo "source build/envsetup.sh"
     exit 1
 fi
-#echo "$QCPATH"
-SECURITY_PROFILE_PATH="$QCPATH/securemsm/security_profiles"
+#echo "$ABSQC_PATH"
+SECURITY_PROFILE_PATH="$ABSQC_PATH/securemsm/security_profiles"
 cd $OUTPATH
 # Create scratch folder to copy the images for creating split PIL images
 if [ -d "$OUTPATH/scratch" ]
@@ -54,7 +56,7 @@ fi
 cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cp $IMG_PATH/kernel-abl/abl-*/LinuxLoader.efi $OUTPATH/scratch/
-cp $QCPATH/guest-bootloader/FVMAIN_COMPACT.Fv $OUTPATH/scratch/
+cp $ABSQC_PATH/guest-bootloader/FVMAIN_COMPACT.Fv $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
 python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 \
@@ -62,19 +64,19 @@ python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 \
 python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
 	dtb.img,0x0FC00000 LinuxLoader.efi,0x10100000 --32
 
-$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
+$ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-boot.elf
-$QCPATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf \
+$ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-bootloader.elf
 
-$QCPATH/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
-$QCPATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf --inspect
+$ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-boot.elf --inspect
+$ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf --inspect
 
 if [ -d "$OUTPATH/scratch/boot" -o -d "$OUTPATH/scratch/bootloader" ]
 then
