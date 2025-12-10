@@ -33,12 +33,12 @@
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
 #<src>                                                 <mnt_point>            <type>  <mnt_flags and options>                               <fs_mgr_flags>
-system                                                 /system                 ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
-system_ext                                             /system_ext             ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
-product                                                /product                ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
-vendor                                                 /vendor                 ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
-system_dlkm                                            /system_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
-vendor_dlkm                                            /vendor_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect
+system                                                 /system                 ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect,avb,avb_keys=/avb/qcar-gsi.avbpubkey
+system_ext                                             /system_ext             ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect,avb
+product                                                /product                ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect,avb
+vendor                                                 /vendor                 ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect,avb
+system_dlkm                                            /system_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect,avb
+vendor_dlkm                                            /vendor_dlkm            ext4    ro,barrier=1,discard                                 wait,logical,first_stage_mount,slotselect,avb
 /dev/block/by-name/metadata                            /metadata               f2fs    noatime,nosuid,nodev,discard                         wait,formattable,first_stage_mount,check
 /dev/block/by-name/userdata                            /data                   f2fs    rw,noatime,nosuid,nodev,inlinecrypt                                           latemount,wait,formattable,check,fileencryption=aes-256-xts:aes-256-cts:v2,metadata_encryption=aes-256-xts,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128M,checkpoint=fs
 /devices/platform/soc/8804000.sdhci/mmc_host*          /storage/sdcard1        vfat    nosuid,nodev                                         wait,voldmanaged=sdcard1:auto,encryptable=footer
@@ -51,3 +51,4 @@ vendor_dlkm                                            /vendor_dlkm            e
 # and fails if it does not find it.
 /dev/block/by-name/misc                                        /misc                   emmc    defaults                                             defaults
 /devices/*/xhci-hcd.*.auto*                            /storage/usbotg         vfat    nosuid,nodev                                         wait,voldmanaged=usbotg:auto
+/dev/block/dsp                                        /vendor/dsp              ext4    ro,nosuid,nodev,barrier=1 wait,slotselect
