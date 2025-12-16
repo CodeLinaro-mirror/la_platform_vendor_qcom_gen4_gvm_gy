@@ -12,8 +12,6 @@ PRODUCT_MODEL := gen4_gvm_gy for arm64
 #flag to differentiate b/w HQX and HGY builds
 TARGET_USES_GY := true
 
-TARGET_USES_GAS := false
-
 TARGET_DISABLE_HSI2S_DLKM := true
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_HAS_VIRTIO_FASTRPC := false
