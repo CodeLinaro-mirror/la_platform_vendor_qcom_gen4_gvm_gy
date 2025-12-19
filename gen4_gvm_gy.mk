@@ -61,7 +61,7 @@ KERNEL_MODULES_OUT := out/target/product/$(TARGET_BOARD_PLATFORM)$(TARGET_BOARD_
 
 
 
-PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
+
 
 
 PRODUCT_VENDOR_PROPERTIES += \
