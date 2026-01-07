@@ -65,6 +65,6 @@ KERNEL_MODULES_OUT := out/target/product/$(TARGET_BOARD_PLATFORM)$(TARGET_BOARD_
 
 
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.boot.audio=audioreach_vio
+    ro.boot.audio=awe
 
 PRODUCT_PACKAGES += uhabtest
