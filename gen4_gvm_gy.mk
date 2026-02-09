@@ -76,3 +76,5 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.boot.audio=awe
 
 PRODUCT_PACKAGES += uhabtest
+
+PRODUCT_VIRTUAL_AB_COW_VERSION = 2
