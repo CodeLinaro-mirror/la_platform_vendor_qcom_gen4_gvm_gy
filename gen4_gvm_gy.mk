@@ -1,5 +1,5 @@
 #Configure derivative suffix for conditional compilation
-TARGET_BOARD_DERIVATIVE_SUFFIX:=_gy
+TARGET_BOARD_DERIVATIVE_SUFFIX ?= _gy
 
 # Inherit from the base product
 include device/qcom/gen4_gvm/gen4_gvm.mk
@@ -29,7 +29,11 @@ TARGET_HAS_VIRTIO_FASTRPC := false
 ENABLE_AB ?= true
 
 ifeq ($(ENABLE_AB), true)
+ifneq ($(TARGET_BOARD_DERIVATIVE_SUFFIX),_gy_qmaa)
 PRODUCT_COPY_FILES += device/qcom/gen4_gvm_gy/fstab_AB_dynamic_partition_variant.gen4_gy.qti:$(TARGET_COPY_OUT_RAMDISK)/first_stage_ramdisk/fstab.qcom
+else
+PRODUCT_COPY_FILES += device/qcom/gen4_gvm_gy_qmaa/fstab_AB_dynamic_partition_variant.gen4_gy.qti:$(TARGET_COPY_OUT_RAMDISK)/first_stage_ramdisk/fstab.qcom
+endif
 endif
 
 
