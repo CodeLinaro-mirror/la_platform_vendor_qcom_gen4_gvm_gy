@@ -4,7 +4,11 @@ include device/qcom/gen4_gvm/BoardConfig.mk
 TARGET_ARCH := arm64
 TARGET_2ND_ARCH := arm
 
+ifneq ($(TARGET_BOARD_DERIVATIVE_SUFFIX),_gy_qmaa)
 DEVICE_MANIFEST_FILE := device/qcom/gen4_gvm_gy/manifest.xml
+else
+DEVICE_MANIFEST_FILE := device/qcom/gen4_gvm_gy_qmaa/manifest.xml
+endif
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/gen4_gvm_gy/framework_manifest.xml
 
 #Clear the HQX command line parameters.
