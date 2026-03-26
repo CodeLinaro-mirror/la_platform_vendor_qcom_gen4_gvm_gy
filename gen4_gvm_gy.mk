@@ -12,6 +12,9 @@ PRODUCT_MODEL := gen4_gvm_gy for arm64
 #flag to differentiate b/w HQX and HGY builds
 TARGET_USES_GY := true
 
+#flag to distinguish AR and AWE architecture
+TARGET_USES_AR := false
+
 # Enable Smcinvoke based System Listeners
 TARGET_ENABLE_SMCI_SYSLISTENER := true
 
@@ -69,11 +72,12 @@ KERNEL_MODULES_OUT := out/target/product/$(TARGET_BOARD_PLATFORM)$(TARGET_BOARD_
 
 
 
-
-
-
-PRODUCT_VENDOR_PROPERTIES += \
-    ro.boot.audio=awe
+#Select audio framework based on TARGET_USES_AR
+ifeq ($(TARGET_USES_AR),true)
+PRODUCT_VENDOR_PROPERTIES += ro.boot.audio=audioreach_vio
+else
+PRODUCT_VENDOR_PROPERTIES += ro.boot.audio=awe
+endif
 
 PRODUCT_PACKAGES += uhabtest
 
