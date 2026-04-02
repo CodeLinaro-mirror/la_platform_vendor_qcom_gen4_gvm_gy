@@ -67,11 +67,13 @@ python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
 $ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
+	$SECURITY_PROFILE_PATH/monaco_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-boot.elf
 $ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
+	$SECURITY_PROFILE_PATH/monaco_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-bootloader.elf
 
