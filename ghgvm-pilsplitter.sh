@@ -20,6 +20,7 @@ ROOT_DIR="$PWD/../../../"
 MKDTBOIMGPY_PATH=$ROOT_DIR/system/libufdt/utils/src
 #echo "$MKDTBOIMGPY_PATH"
 IMG_PATH="$PWD/../gen4-kernel"
+RADIO_PATH="$PWD/radio"
 #echo "$IMG_PATH"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
@@ -94,3 +95,12 @@ echo "Creating the vm-bootloader.img"
 $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/bootloader \
 	$OUTPATH/vm-bootloader.img ext4 / 8388608 \
 	--journal_size=0
+
+echo "Copying vm-bootloader.img to the radio folder for OTA"
+
+[ -f "$ROOT_DIR/out/target/product/gen4_gvm_gy/vm-bootloader.img" ] || {
+    echo "ERROR: vm-bootloader.img not found"
+    exit 1
+}
+
+cp -f "$ROOT_DIR/out/target/product/gen4_gvm_gy/vm-bootloader.img" "$RADIO_PATH/vm-bootloader.img"
