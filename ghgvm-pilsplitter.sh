@@ -56,12 +56,12 @@ fi
 cp $IMG_PATH/Image $OUTPATH/scratch/
 cp $OUTPATH/ramdisk.img $OUTPATH/scratch/
 cp $IMG_PATH/kernel-abl/abl-*/LinuxLoader.efi $OUTPATH/scratch/
-cp $ABSQC_PATH/guest-bootloader/FVMAIN_COMPACT.Fv $OUTPATH/scratch/
+cp $ABSQC_PATH/guest-bootloader/FVMAIN_COMPACT_45.Fv $OUTPATH/scratch/
 cd $OUTPATH/scratch
 
 python3 $PIL_PATH/image_header.py autogvm-boot.elf Image,0x0 \
 	dtb.img,0x3000000 ramdisk.img,0x3100000 --32
-python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
+python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT_45.Fv,0x0 \
 	dtb.img,0x0FC00000 LinuxLoader.efi,0x10100000 --32
 
 $ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
