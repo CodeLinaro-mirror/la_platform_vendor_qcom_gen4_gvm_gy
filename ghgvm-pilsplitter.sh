@@ -20,6 +20,7 @@ ROOT_DIR="$PWD/../../../"
 MKDTBOIMGPY_PATH=$ROOT_DIR/system/libufdt/utils/src
 #echo "$MKDTBOIMGPY_PATH"
 IMG_PATH="$PWD/../gen4-kernel"
+RADIO_PATH="$PWD/radio"
 #echo "$IMG_PATH"
 cd $IMG_PATH
 OUTPATH="$PWD/../../../out/target/product/gen4_gvm_gy"
@@ -67,11 +68,13 @@ python3 $PIL_PATH/image_header.py autogvm-bootloader.elf FVMAIN_COMPACT.Fv,0x0 \
 $ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-boot.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
+	$SECURITY_PROFILE_PATH/monaco_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-boot.elf
 $ABSQC_PATH/sectools/Linux/sectools secure-image autogvm-bootloader.elf \
 	--image-id GVM1 \
 	--security-profile $SECURITY_PROFILE_PATH/lemans_tz_security_profile.xml \
+	$SECURITY_PROFILE_PATH/monaco_tz_security_profile.xml \
 	--sign --signing-mode TEST \
 	--outfile autogvm_signed-bootloader.elf
 
@@ -94,3 +97,12 @@ echo "Creating the vm-bootloader.img"
 $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/bootloader \
 	$OUTPATH/vm-bootloader.img ext4 / 8388608 \
 	--journal_size=0
+
+echo "Copying vm-bootloader.img to the radio folder for OTA"
+
+[ -f "$ROOT_DIR/out/target/product/gen4_gvm_gy/vm-bootloader.img" ] || {
+    echo "ERROR: vm-bootloader.img not found"
+    exit 1
+}
+
+cp -f "$ROOT_DIR/out/target/product/gen4_gvm_gy/vm-bootloader.img" "$RADIO_PATH/vm-bootloader.img"
