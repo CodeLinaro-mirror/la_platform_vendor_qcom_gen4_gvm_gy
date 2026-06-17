@@ -15,12 +15,12 @@ DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/gen4_gvm_gy/framework_manifest.xml
 BOARD_KERNEL_CMDLINE :=
 
 #Set the gen4_gvm_gy specific parameters.
-BOARD_KERNEL_CMDLINE := debug user_debug=31 loglevel=9 print-fatal-signals=1 init=/init swiotlb=4096 kpti=0 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
+BOARD_KERNEL_CMDLINE := user_debug=31 print-fatal-signals=1 init=/init swiotlb=4096 kpti=0 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
 
 BOARD_BOOTCONFIG += androidboot.usbcontroller=a400000.dwc3
 
 ifeq ($(TARGET_CONSOLE_ENABLED),true)
-BOARD_KERNEL_CMDLINE += console=hvc0,115200
+BOARD_KERNEL_CMDLINE += console=hvc0,115200 debug loglevel=9
 else ifeq ($(TARGET_CONSOLE_ENABLED),false)
 BOARD_KERNEL_CMDLINE += qcom_geni_serial.con_enabled=0
 endif
