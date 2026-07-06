@@ -97,12 +97,18 @@ echo "Creating the vm-bootloader.img"
 $ROOT_DIR/out/host/linux-x86/bin/mkuserimg_mke2fs $OUTPATH/scratch/bootloader \
 	$OUTPATH/vm-bootloader.img ext4 / 8388608 \
 	--journal_size=0
+# Ensure the target directory exists
+if [ ! -d "$RADIO_PATH" ]; then
+    mkdir -p "$RADIO_PATH"
+fi
 
-echo "Copying vm-bootloader.img to the radio folder for OTA"
+if [ ! -f "$OUTPATH/vm-bootloader.img" ]; then
+    echo "ERROR: vm-bootloader.img not found at $OUTPATH"
+    exit 1
+fi
 
-[ -f "$ROOT_DIR/out/target/product/gen4_gvm_gy/vm-bootloader.img" ] || {
-    echo "ERROR: vm-bootloader.img not found"
+echo "Copying vm-bootloader.img to the radio folder"
+cp -f "$OUTPATH/vm-bootloader.img" "$RADIO_PATH/" || {
+    echo "ERROR: Failed to copy vm-bootloader.img to $RADIO_PATH"
     exit 1
 }
-
-cp -f "$ROOT_DIR/out/target/product/gen4_gvm_gy/vm-bootloader.img" "$RADIO_PATH/vm-bootloader.img"
