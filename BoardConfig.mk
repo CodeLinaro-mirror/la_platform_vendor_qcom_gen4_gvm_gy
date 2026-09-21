@@ -19,6 +19,10 @@ BOARD_KERNEL_CMDLINE := user_debug=31 print-fatal-signals=1 init=/init swiotlb=4
 
 BOARD_BOOTCONFIG += androidboot.usbcontroller=a400000.dwc3
 
+ifeq ($(TARGET_BUILD_VARIANT),user)
+    TARGET_CONSOLE_ENABLED := false
+endif
+
 ifeq ($(TARGET_CONSOLE_ENABLED),true)
 BOARD_KERNEL_CMDLINE += console=hvc0,115200 debug loglevel=9
 else ifeq ($(TARGET_CONSOLE_ENABLED),false)
